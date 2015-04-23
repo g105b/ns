@@ -13,7 +13,7 @@ ns provides two simple but useful features:
 
 ```js
 // Assigns the function to window.MyApp.Security.authenticate.
-// NOTE: window.MyApp and may not be initialised yet.
+// NOTE: window.MyApp may not be initialised yet.
 ns("MyApp.Security.authenticate", function(username, password) { /* .. */ } );
 
 // Assigns the object to window.MyApp.Security.credentials.
@@ -35,7 +35,7 @@ go(function() { alert("DOM is loaded!"); });
 // Assign your namespaced function to load on DOMContentReady:
 go(MyApp.UI.init);
 
-// Assign multiple callbacks one after another, like this:
+// Assign multiple namespaced functions one after another, like this:
 go(MyApp.UI.enhance);
 go(MyApp.Forms.validate);
 go(function() { console.log("DOM loaded!"); });
@@ -49,8 +49,12 @@ go([
     },
 ]);
 
-// If you want to trigger the callback manually:
-var callback = go(myFunc);
+// Each time you add something to the go() queue, the callback function
+// that iterates through the queue is returned (so you can also trigger
+// it manually if required).
+var callback = go(MyApp.UI.init);
+// callback() will trigger on DOMContentReady automatically, but call it
+// manually here too if you need (e.g. in tests or not in a browser context).
 callback();
 ```
 
