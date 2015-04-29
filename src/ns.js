@@ -116,7 +116,7 @@ exports.go = go;
 	$$;
 
 	for(e in exports) {
-		if(!exports.hasOwnProperty()) {
+		if(!exports.hasOwnProperty(e)) {
 			continue;
 		}
 
